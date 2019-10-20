@@ -2,6 +2,8 @@ import React from "react";
 
 const TableConfiguration = props => {
   const currentTable = props.currentTable;
+  const tableIndex = props.currentTable.index;
+  const tableColor = currentTable.tableColor;
 
   const clearInputs = () => {
     const theInputsVars = ["N", "X", "M", "W", "D"];
@@ -9,14 +11,15 @@ const TableConfiguration = props => {
       document.getElementById(ids).value = "";
     });
   };
+
   return (
     <div>
-      <span>
+      <div>
         Table:
         <h4 style={{ color: currentTable.tableColor }}>
           {currentTable.tableColor}
         </h4>
-      </span>
+      </div>
       {"N = "}
       <input id={"N"} placeholder={currentTable.N}></input> <br />
       {"X = "}
@@ -27,7 +30,12 @@ const TableConfiguration = props => {
       <input id={"W"} placeholder={currentTable.W}></input> <br />
       {"D = "}
       <input id={"D"} placeholder={currentTable.D}></input> <br />
-      <button id={"ok"}>ok</button>
+      <button
+        id={"ok"}
+        onClick={e => props.updateTable(e, tableIndex, tableColor)}
+      >
+        ok
+      </button>
       <button id={"cancel"} onClick={() => clearInputs()}>
         cancel
       </button>
