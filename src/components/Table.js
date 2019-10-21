@@ -7,6 +7,7 @@ const Table = props => {
     let max = Number(props.tableData.M);
     let incr = Number(props.tableData.X);
 
+    // Table creator according to props on load & on tableData update[subscription]
     const tableData = [];
     let tableRow = [];
     let counter = 0;
