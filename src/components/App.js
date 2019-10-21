@@ -18,7 +18,7 @@ class App extends Component {
         },
         {
           tableColor: "GREEN",
-          N: 232,
+          N: 231,
           X: 1,
           M: 247,
           W: 30,
@@ -48,12 +48,10 @@ class App extends Component {
     this.setState({
       currentTable: configurableTable
     });
-
-    /*  function grabs the inputs in the config component and updates that table's state */
   }
+  /*  function grabs the inputs in the config component and updates that table's state */
   updateTable(e, tableIndex, tableColor) {
     // if the input is empty, use the 'state.currentTable' input
-    // remember to convert inputNums into numbers
     const inputIds = ["N", "X", "M", "W", "D"];
     const updatedTable = {};
     updatedTable.tableColor = tableColor;
@@ -73,16 +71,16 @@ class App extends Component {
   }
 
   render() {
-    console.log("should rerender after setting", this.state);
     const tables = [];
     const tableArr = this.state.threeTables;
     for (let i = 0; i < tableArr.length; i += 1) {
       let curTable = tableArr[i];
+      let tableColor = curTable.tableColor;
       tables.push(
         <Table
           key={i}
           tableEl={i}
-          tableColor={curTable.tableColor}
+          tableColor={tableColor}
           switchTables={this.switchTables}
           tableData={curTable}
         ></Table>
