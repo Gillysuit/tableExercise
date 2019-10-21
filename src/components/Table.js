@@ -36,10 +36,13 @@ const Table = props => {
         maxWidth: `${props.tableData.W}` + "vw",
         border: "solid",
         borderWidth: "thin",
-        borderColor: props.tableColor
+        borderColor: props.tableColor,
+        marginLeft: "10px",
+        marginRight: "10px",
+        width: "100vw"
       }}
     >
-      <table>
+      <table style={{ width: "100%" }}>
         <tbody>{builtTable}</tbody>
       </table>
 

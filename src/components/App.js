@@ -35,10 +35,24 @@ class App extends Component {
           index: 2
         }
       ],
-      currentTable: null
+      currentTable: null,
+      screenWidth: 0
     };
     this.switchTables = this.switchTables.bind(this);
     this.updateTable = this.updateTable.bind(this);
+    this.updateScreenWidth = this.updateScreenWidth.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.updateScreenWidth);
+  }
+
+  componentWillUnmount() {
+    window.addEventListener("resize", this.updateScreenWidth);
+  }
+
+  updateScreenWidth() {
+    this.setState({ screenWidth: window.innerWidth });
   }
 
   switchTables(e, props) {
@@ -49,6 +63,7 @@ class App extends Component {
       currentTable: configurableTable
     });
   }
+
   /*  function grabs the inputs in the config component and updates that table's state */
   updateTable(e, tableIndex, tableColor) {
     // if the input is empty, use the 'state.currentTable' input
@@ -86,11 +101,15 @@ class App extends Component {
         ></Table>
       );
     }
+    // rule 6: remove BlueTable at certain width
+    if (this.state.screenWidth < 470) tables.pop();
 
     return (
       <div>
         <h1>{`Tables Store`}</h1>
-        {tables}
+        <div className={"tables"} style={{ display: "flex" }}>
+          {tables}
+        </div>
 
         {this.state.currentTable ? (
           <TableConfiguration
