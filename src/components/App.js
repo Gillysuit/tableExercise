@@ -30,7 +30,7 @@ class App extends Component {
           N: 47,
           X: 2,
           M: 81,
-          W: 49,
+          W: 40,
           D: "RTL-UP",
           index: 2
         }
@@ -84,6 +84,7 @@ class App extends Component {
           tableEl={i}
           tableColor={curTable.tableColor}
           switchTables={this.switchTables}
+          tableData={curTable}
         ></Table>
       );
     }

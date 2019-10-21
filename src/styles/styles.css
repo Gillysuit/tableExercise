@@ -3,3 +3,7 @@ body {
   color: palevioletred;
   text-align: center;
 }
+
+tr:nth-child(even) {
+  background-color: #eee;
+}

@@ -27,7 +27,8 @@ const TableConfiguration = props => {
       {"M = "}
       <input id={"M"} placeholder={currentTable.M}></input> <br />
       {"W = "}
-      <input id={"W"} placeholder={currentTable.W}></input> <br />
+      <input id={"W"} placeholder={currentTable.W}></input> {" %"}
+      <br />
       {"D = "}
       <input id={"D"} placeholder={currentTable.D}></input> <br />
       <button
