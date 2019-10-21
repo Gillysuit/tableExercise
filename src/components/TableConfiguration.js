@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 const TableConfiguration = props => {
   const currentTable = props.currentTable;
   const tableIndex = props.currentTable.index;
   const tableColor = currentTable.tableColor;
+
+  const [selectOption, setSelectOption] = useState(currentTable.D);
+
+  const handleSelectOption = e => {
+    setSelectOption(e.target.value);
+  };
 
   const clearInputs = () => {
     const theInputsVars = ["N", "X", "M", "W", "D"];
@@ -30,10 +36,20 @@ const TableConfiguration = props => {
       <input id={"W"} placeholder={currentTable.W}></input> {" %"}
       <br />
       {"D = "}
-      <input id={"D"} placeholder={currentTable.D}></input> <br />
+      <select
+        id={"D"}
+        value={currentTable.D}
+        onChange={e => handleSelectOption(e)}
+      >
+        <option value="LTR-UP">LTR-UP</option>
+        <option value="LTR-DOWN">LTR-DOWN</option>
+      </select>
+      <br />
       <button
         id={"ok"}
-        onClick={e => props.updateTable(e, tableIndex, tableColor)}
+        onClick={e =>
+          props.updateTable(e, tableIndex, tableColor, selectOption)
+        }
       >
         ok
       </button>

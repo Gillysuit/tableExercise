@@ -36,7 +36,7 @@ class App extends Component {
         }
       ],
       currentTable: null,
-      screenWidth: 0
+      screenWidth: 1080
     };
     this.switchTables = this.switchTables.bind(this);
     this.updateTable = this.updateTable.bind(this);
@@ -65,11 +65,12 @@ class App extends Component {
   }
 
   /*  function grabs the inputs in the config component and updates that table's state */
-  updateTable(e, tableIndex, tableColor) {
+  updateTable(e, tableIndex, tableColor, selectOption) {
     // if the input is empty, use the 'state.currentTable' input
-    const inputIds = ["N", "X", "M", "W", "D"];
+    const inputIds = ["N", "X", "M", "W"];
     const updatedTable = {};
     updatedTable.tableColor = tableColor;
+    updatedTable.D = selectOption;
 
     inputIds.forEach(ids => {
       document.getElementById(ids).value !== ""
@@ -102,11 +103,13 @@ class App extends Component {
       );
     }
     // rule 6: remove BlueTable at certain width
-    if (this.state.screenWidth < 470) tables.pop();
+    if (this.state.screenWidth < 470) {
+      tables.pop();
+    }
 
     return (
       <div>
-        <h1>{`Tables Store`}</h1>
+        <h1>{`Tables Generator`}</h1>
         <div className={"tables"} style={{ display: "flex" }}>
           {tables}
         </div>
@@ -115,6 +118,7 @@ class App extends Component {
           <TableConfiguration
             currentTable={this.state.currentTable}
             updateTable={this.updateTable}
+            handleSelectOptions={this.handleSelectOptions}
           ></TableConfiguration>
         ) : (
           <div>Pick a Table!</div>

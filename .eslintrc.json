@@ -11,7 +11,8 @@
   "rules": {
     "react/prop-types": 0,
     "no-console": 1,
-    "css-modules/no-unused-class": 0
+    "css-modules/no-unused-class": 0,
+    "jsx-a11y/no-onchange": 0
   },
   "plugins": ["react", "import", "jsx-a11y", "prettier", "css-modules"],
   "parserOptions": {
