@@ -1,25 +1,20 @@
 import React, { useState } from "react";
 
 const TableConfiguration = props => {
+  // attempt at cleaning up variable names
   const currentTable = props.currentTable;
   const tableIndex = props.currentTable.index;
   const tableColor = currentTable.tableColor;
 
-  const [selectOption, setSelectOption] = useState(currentTable.D);
+  // this will keep a local state of the select dropdown options and pass it through a props.handler function
+  const [selectOption, setSelectOption] = useState(null);
 
   const handleSelectOption = e => {
     setSelectOption(e.target.value);
   };
 
-  const clearInputs = () => {
-    const theInputsVars = ["N", "X", "M", "W", "D"];
-    theInputsVars.forEach(ids => {
-      document.getElementById(ids).value = "";
-    });
-  };
-
   return (
-    <div>
+    <div style={{ background: "#eee", maxWidth: "30vw", marginTop: "20px" }}>
       <div>
         Table:
         <h4 style={{ color: currentTable.tableColor }}>
@@ -38,7 +33,7 @@ const TableConfiguration = props => {
       {"D = "}
       <select
         id={"D"}
-        value={currentTable.D}
+        value={selectOption ? selectOption : currentTable.D}
         onChange={e => handleSelectOption(e)}
       >
         <option value="LTR-UP">LTR-UP</option>
@@ -53,7 +48,7 @@ const TableConfiguration = props => {
       >
         ok
       </button>
-      <button id={"cancel"} onClick={() => clearInputs()}>
+      <button id={"cancel"} onClick={() => props.clearInputs()}>
         cancel
       </button>
     </div>

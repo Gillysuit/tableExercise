@@ -41,8 +41,9 @@ class App extends Component {
     this.switchTables = this.switchTables.bind(this);
     this.updateTable = this.updateTable.bind(this);
     this.updateScreenWidth = this.updateScreenWidth.bind(this);
+    this.clearInputs = this.clearInputs.bind(this);
   }
-
+  // Life Cycle Methods for checking Screen Width
   componentDidMount() {
     window.addEventListener("resize", this.updateScreenWidth);
   }
@@ -55,6 +56,16 @@ class App extends Component {
     this.setState({ screenWidth: window.innerWidth });
   }
 
+  clearInputs() {
+    const theInputsVars = ["N", "X", "M", "W"];
+    theInputsVars.forEach(ids => {
+      document.getElementById(ids).value = "";
+    });
+    // change select option back
+    document.getElementById("D").value = this.state.currentTable.D;
+  }
+
+  // handler Function for displaying current configurable Table & create inputs for udpates
   switchTables(e, props) {
     let tableEl = props.tableEl;
     let configurableTable = this.state["threeTables"][tableEl];
@@ -64,7 +75,7 @@ class App extends Component {
     });
   }
 
-  /*  function grabs the inputs in the config component and updates that table's state */
+  //  function grabs the inputs in the config component and updates that table's state
   updateTable(e, tableIndex, tableColor, selectOption) {
     // if the input is empty, use the 'state.currentTable' input
     const inputIds = ["N", "X", "M", "W"];
@@ -84,9 +95,11 @@ class App extends Component {
       newThreeTables[tableIndex] = updatedTable;
       return { threeTables: newThreeTables, currentTable: updatedTable };
     });
+    this.clearInputs();
   }
 
   render() {
+    // create Tables off of current State, threeTables, by iterating over the arr
     const tables = [];
     const tableArr = this.state.threeTables;
     for (let i = 0; i < tableArr.length; i += 1) {
@@ -110,15 +123,17 @@ class App extends Component {
     return (
       <div>
         <h1>{`Tables Generator`}</h1>
+
         <div className={"tables"} style={{ display: "flex" }}>
           {tables}
         </div>
-
+        {/* conditional render, checks if a current table is selected through the configure button */}
         {this.state.currentTable ? (
           <TableConfiguration
             currentTable={this.state.currentTable}
             updateTable={this.updateTable}
             handleSelectOptions={this.handleSelectOptions}
+            clearInputs={this.clearInputs}
           ></TableConfiguration>
         ) : (
           <div>Pick a Table!</div>
